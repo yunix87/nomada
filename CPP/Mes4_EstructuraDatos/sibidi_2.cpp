@@ -14,7 +14,7 @@
 #include <limits>
 
 using namespace std;
-//Proyecto modificado
+//Proyecto modificado para
 // ==========================================
 // 1. ESTRUCTURAS DE DATOS (Nodos)
 // ==========================================
