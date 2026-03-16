@@ -1,0 +1,6 @@
+{
+  "clangd.arguments": [
+    "--query-driver=C:\\msys64\\**",
+    "--target=x86_64-w64-mingw32"
+  ]
+}

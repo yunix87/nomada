@@ -1,0 +1,1 @@
+//Diseña un programa que lea un archivo de texto y genere 
