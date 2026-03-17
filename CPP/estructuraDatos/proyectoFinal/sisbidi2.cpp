@@ -1,11 +1,4 @@
-/* * PROYECTO 5 - SISTEMA DE BIBLIOTECA DIGITAL (SIBIDI)
- * trabajo Final Estructura de Datos - Bootcam Nomada
- * * Este programa utiliza:
- * 1. Lista Enlazada Simple (Libros)
- * 2. Lista Doblemente Enlazada (Préstamos)
- * 3. Lista Circular (Usuarios)
- * 4. Árbol Binario de Búsqueda (Búsqueda por ISBN)
- * 5. Arreglos dinámicos y algoritmos de ordenamiento
+/* * PROYECTO 5 - SISTEMA DE BIBLIOTECA DIGITAL (SIBIDI) 
  */
 
 #include <iostream>
@@ -13,41 +6,35 @@
 
 using namespace std;
 
-
+// ==========================================
 // 1. ESTRUCTURAS DE DATOS (Nodos)
+// ==========================================
 
-// Lista Simple: Cada libro apunta solo al siguiente.
+// Lista Simple
 struct Libro {
     string ISBN;
     string titulo;
     string autor;
     int anio;
     bool disponible;
-    Libro *siguiente; 
+    Libro* siguiente; 
 };
 
-// Lista Circular: El último usuario apuntará de regreso al primero.
+// Lista Circular
 struct Usuario {
     string idUsuario;
     string nombre;
-    Usuario *siguiente; 
+    Usuario* siguiente; 
 };
 
-// Lista Doble: Cada préstamo apunta al siguiente y al anterior.
+// Lista Doble
 struct Prestamo {
     string idPrestamo;
     string ISBN;
     string idUsuario;
     string fecha;
-    Prestamo *siguiente; 
-    Prestamo *anterior;  
-};
-
-// Árbol Binario: Para organizar y buscar rápido por ISBN.
-struct NodoArbol {
-    Libro *direccionLibro; // Apunta al libro original para no duplicar datos
-    NodoArbol *izquierda;
-    NodoArbol *derecha;
+    Prestamo* siguiente; 
+    Prestamo* anterior;  
 };
 
 // ==========================================
@@ -56,53 +43,14 @@ struct NodoArbol {
 
 class Biblioteca {
 private:
-    // Punteros principales (Cabeceras de las listas)
-    Libro *listaLibros;
-    Usuario *listaUsuarios;
-    Prestamo *listaPrestamos;
-    Prestamo *ultimoPrestamo;
-    NodoArbol *arbolLibros;
+    // Punteros principales 
+    Libro* listaLibros;
+    Usuario* listaUsuarios;
+    Prestamo* listaPrestamos;
+    Prestamo* ultimoPrestamo;
     int totalLibros;
 
-    // --- Funciones Internas para el Árbol ---
-    
-    // Inserta un libro en el árbol basándose en si el ISBN es mayor o menor
-    NodoArbol *insertarEnArbol(NodoArbol* nodo, Libro* nuevoLibro) {
-        if (nodo == nullptr) {
-            NodoArbol* nuevo = new NodoArbol();
-            nuevo->direccionLibro = nuevoLibro;
-            nuevo->izquierda = nullptr;
-            nuevo->derecha = nullptr;
-            return nuevo;
-        }
-        // Si el ISBN es menor, va a la izquierda
-        if (nuevoLibro->ISBN < nodo->direccionLibro->ISBN) {
-            nodo->izquierda = insertarEnArbol(nodo->izquierda, nuevoLibro);
-        } 
-        // Si es mayor, va a la derecha
-        else if (nuevoLibro->ISBN > nodo->direccionLibro->ISBN) {
-            nodo->derecha = insertarEnArbol(nodo->derecha, nuevoLibro);
-        }
-        return nodo;
-    }
-
-    // Busca un libro en el árbol recursivamente
-    Libro* buscarEnArbol(NodoArbol* nodo, string isbnBuscar) {
-        if (nodo == nullptr) return nullptr; // No se encontró
-        
-        if (nodo->direccionLibro->ISBN == isbnBuscar) {
-            return nodo->direccionLibro; // Encontrado!
-        }
-        
-        if (isbnBuscar < nodo->direccionLibro->ISBN) {
-            return buscarEnArbol(nodo->izquierda, isbnBuscar);
-        } else {
-            return buscarEnArbol(nodo->derecha, isbnBuscar);
-        }
-    }
-
-    // --- Algoritmos Complejos (Quick Sort y Merge Sort) ---
-    // (Se incluyen por requerimiento, pero se usan como "caja negra" si es muy complejo)
+    // --- Algoritmos de Ordenamiento Avanzados (Quick Sort y Merge Sort) ---
     
     void quicksort(Libro* arreglo[], int inicio, int fin) {
         if (inicio < fin) {
@@ -159,7 +107,6 @@ public:
         listaUsuarios = nullptr;
         listaPrestamos = nullptr;
         ultimoPrestamo = nullptr;
-        arbolLibros = nullptr;
         totalLibros = 0;
     }
 
@@ -180,9 +127,6 @@ public:
         nuevo->siguiente = listaLibros;
         listaLibros = nuevo;
         totalLibros++;
-
-        // Paso 3: Insertar también en el Árbol
-        arbolLibros = insertarEnArbol(arbolLibros, nuevo);
         
         cout << "-> Libro guardado correctamente.\n";
     }
@@ -209,15 +153,24 @@ public:
         cout << "-> Usuario guardado correctamente.\n";
     }
 
-    void agregarPrestamo(string idPrestamo, string isbn, string idUsuario, string fecha) {
-        // Primero verificamos si el libro existe usando el árbol (rápido)
-        Libro* libro = buscarEnArbol(arbolLibros, isbn);
+    void agregarPrestamo(string idPrestamo, string isbnBuscar, string idUsuario, string fecha) {
+        // Buscar el libro secuencialmente (Búsqueda Lineal)
+        Libro* libroEncontrado = nullptr;
+        Libro* temporal = listaLibros;
         
-        if (libro == nullptr) {
-            cout << "-> Error: El libro no existe.\n";
+        while (temporal != nullptr) {
+            if (temporal->ISBN == isbnBuscar) {
+                libroEncontrado = temporal;
+                break;
+            }
+            temporal = temporal->siguiente;
+        }
+        
+        if (libroEncontrado == nullptr) {
+            cout << "-> Error: El libro con ISBN " << isbnBuscar << " no existe.\n";
             return;
         }
-        if (libro->disponible == false) {
+        if (libroEncontrado->disponible == false) {
             cout << "-> Error: El libro ya esta prestado.\n";
             return;
         }
@@ -225,7 +178,7 @@ public:
         // Crear el préstamo para la Lista Doble
         Prestamo* nuevo = new Prestamo();
         nuevo->idPrestamo = idPrestamo;
-        nuevo->ISBN = isbn;
+        nuevo->ISBN = isbnBuscar;
         nuevo->idUsuario = idUsuario;
         nuevo->fecha = fecha;
         nuevo->siguiente = nullptr;
@@ -240,12 +193,12 @@ public:
             ultimoPrestamo = nuevo;
         }
 
-        libro->disponible = false; // Lo marcamos como no disponible
+        libroEncontrado->disponible = false; // Lo marcamos como no disponible
         cout << "-> Prestamo realizado correctamente.\n";
     }
 
     // ==========================================
-    // 4. RECURSIVIDAD (Requerimiento)
+    // 4. RECURSIVIDAD
     // ==========================================
 
     // Se llama a sí misma para imprimir el siguiente libro
@@ -258,6 +211,7 @@ public:
 
     void iniciarMostrarLibros() {
         cout << "\n--- Catalogo de Libros ---\n";
+        if (listaLibros == nullptr) cout << "No hay libros.\n";
         mostrarLibrosRecursivo(listaLibros);
     }
 
@@ -275,28 +229,26 @@ public:
     }
 
     // ==========================================
-    // 5. BÚSQUEDAS
+    // 5. BÚSQUEDA
     // ==========================================
 
-    void buscarLibro(string isbn) {
-        // 1. Busqueda Lineal (Lenta, busca uno por uno)
+    void buscarLibroLineal(string isbn) {
         Libro* temporal = listaLibros;
         int pasos = 0;
+        bool encontrado = false;
+        
         while (temporal != nullptr) {
             pasos++;
             if (temporal->ISBN == isbn) {
-                cout << "Encontrado Lineal en " << pasos << " pasos: " << temporal->titulo << "\n";
+                cout << "-> Encontrado en " << pasos << " pasos: " << temporal->titulo << "\n";
+                encontrado = true;
                 break;
             }
             temporal = temporal->siguiente;
         }
-
-        // 2. Busqueda en Arbol (Rápida)
-        Libro* arbolEncontrado = buscarEnArbol(arbolLibros, isbn);
-        if (arbolEncontrado != nullptr) {
-            cout << "Encontrado en Arbol (Rapido): " << arbolEncontrado->titulo << "\n";
-        } else {
-            cout << "El libro no existe en el sistema.\n";
+        
+        if (!encontrado) {
+            cout << "-> El libro no existe en el sistema.\n";
         }
     }
 
@@ -307,7 +259,7 @@ public:
     void ordenarLibros(int tipo) {
         if (totalLibros == 0) return;
 
-        // Crear un arreglo dinámico para poder ordenarlo (Las listas no se ordenan fácil)
+        // Crear un arreglo dinámico para poder ordenarlo
         Libro** arreglo = new Libro*[totalLibros];
         Libro* temp = listaLibros;
         for (int i = 0; i < totalLibros; i++) {
@@ -315,9 +267,9 @@ public:
             temp = temp->siguiente;
         }
 
-        // Aplicar el algoritmo clásico según elijan
+        // Aplicar el algoritmo seleccionado
         switch (tipo) {
-            case 1: // Burbuja (El más fácil de explicar)
+            case 1: // Burbuja
                 for (int i = 0; i < totalLibros - 1; i++) {
                     for (int j = 0; j < totalLibros - i - 1; j++) {
                         if (arreglo[j]->ISBN > arreglo[j + 1]->ISBN) {
@@ -362,7 +314,25 @@ public:
 // 7. MENÚ PRINCIPAL
 // ==========================================
 
+void mostrarLogo() {
+    cout << R"(
+  _____  _____  ____   _____  _____  _____ 
+ / ____||_   _||  _ \ |_   _||  __ \|_   _|
+| (___    | |  | |_) |  | |  | |  | |  | |  
+ \___ \   | |  |  _ <   | |  | |  | |  | |  
+ ____) | _| |_ | |_) | _| |_ | |__| | _| |_ 
+|_____/ |_____||____/ |_____||_____/ |_____|
+                                            
+       Sistema de Biblioteca Digital         
+==============================================
+)" << '\n';
+}
+
 int main() {
+    mostrarLogo();
+    cout << "Presione ENTER para continuar...";
+    cin.get(); 
+
     Biblioteca miBiblioteca;
     int opcion;
     string texto1, texto2, texto3;
@@ -380,18 +350,17 @@ int main() {
         cout << "3. Prestar Libro\n";
         cout << "4. Ver Libros (Recursivo)\n";
         cout << "5. Contar Libros Disponibles (Recursivo)\n";
-        cout << "6. Buscar Libro (Lineal y Arbol)\n";
+        cout << "6. Buscar Libro (Lineal)\n";
         cout << "7. Ordenar Libros\n";
         cout << "0. Salir\n";
         cout << "Opcion: ";
         
-        // Validación sencilla para evitar que se cuelgue si ingresan letras
         while (!(cin >> opcion)) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Error. Ingrese un numero: ";
         }
-        cin.ignore(1000, '\n'); // Limpiar el "Enter" que queda en el buffer
+        cin.ignore(1000, '\n');
 
         switch (opcion) {
             case 1:
@@ -416,7 +385,7 @@ int main() {
             case 5: miBiblioteca.mostrarCantidadDisponibles(); break;
             case 6:
                 cout << "Ingrese ISBN a buscar: "; getline(cin, texto1);
-                miBiblioteca.buscarLibro(texto1);
+                miBiblioteca.buscarLibroLineal(texto1);
                 break;
             case 7:
                 cout << "1. Burbuja | 2. Seleccion | 3. Insercion | 4. Quick | 5. Merge\nElija metodo: ";
