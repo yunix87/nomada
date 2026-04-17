@@ -1,0 +1,672 @@
+/*
+  ================================================
+  SoundAura — Hoja de estilos (styles.css)
+  Nivel: Básico · Técnica principal: Flexbox
+  ================================================
+
+  ¿QUÉ ES CSS?
+  CSS (Cascading Style Sheets) le da apariencia al HTML.
+  Funciona así:   selector { propiedad: valor; }
+  Ejemplo:        h1 { color: red; }
+
+  ¿CÓMO SE ORGANIZA ESTE ARCHIVO?
+  1. Variables de color (colores reutilizables)
+  2. Estilos generales (reset y base)
+  3. Navbar
+  4. Hero
+  5. Características
+  6. Testimonios
+  7. CTA final
+  8. Footer
+  9. Responsive (celulares)
+*/
+
+
+/* ================================================
+   1. VARIABLES DE COLOR
+   Las variables en CSS empiezan con --
+   Las defines una vez y las reutilizas en todo el archivo.
+   Si quieres cambiar el color verde, solo lo cambias aquí.
+   ================================================ */
+:root {
+  /*
+    :root significa "el elemento raíz", o sea toda la página.
+    Las variables declaradas aquí están disponibles en todo el CSS.
+  */
+
+  --color-fondo:      #0d0d0d;   /* Negro casi total — fondo de la página */
+  --color-superficie: #1a1a1a;   /* Negro un poco más claro — fondo de tarjetas */
+  --color-borde:      #2e2e2e;   /* Gris oscuro — para bordes */
+  --color-texto:      #f0ede8;   /* Blanco roto — texto principal */
+  --color-texto-suave:#999999;   /* Gris — texto secundario */
+  --color-verde:      #c8f53f;   /* Verde lima — color de acento */
+  --color-verde-oscuro:#a8d428;  /* Verde lima más oscuro — para hover */
+}
+
+
+/* ================================================
+   2. ESTILOS GENERALES
+   Aquí "reseteamos" algunos estilos que los navegadores
+   ponen por defecto, para tener control total.
+   ================================================ */
+
+/* El * selecciona TODOS los elementos de la página */
+* {
+  /*
+    Por defecto, el navegador suma padding y border al ancho.
+    Con box-sizing: border-box le decimos que los INCLUYA dentro del ancho.
+    Esto hace los cálculos de tamaño mucho más predecibles.
+  */
+  box-sizing: border-box;
+
+  /* Quitamos márgenes y rellenos que el navegador pone por defecto */
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para el elemento <body> (toda la página) */
+body {
+  /* Usamos la fuente Poppins que importamos de Google Fonts */
+  font-family: 'Poppins', sans-serif;
+  /*
+    sans-serif es el "plan B": si Poppins no carga,
+    el navegador usa la fuente sans-serif del sistema.
+  */
+
+  background-color: var(--color-fondo);  /* Usamos nuestra variable */
+  color: var(--color-texto);             /* Color de texto por defecto */
+  line-height: 1.6;                      /* Espaciado entre líneas */
+
+  /* Hace que el scroll sea suave al hacer clic en los enlaces del menú */
+  scroll-behavior: smooth;
+}
+
+/* Quitamos el subrayado de todos los enlaces */
+a {
+  text-decoration: none;
+  color: inherit; /* Hereda el color del elemento padre */
+}
+
+/* Quitamos los puntos de las listas */
+ul {
+  list-style: none;
+}
+
+/* Las imágenes no se salen de su contenedor */
+img {
+  max-width: 100%;
+  display: block; /* Elimina el espacio blanco que aparece debajo de las imágenes */
+}
+
+/* Clase utilitaria para el texto en verde lima */
+.texto-verde {
+  color: var(--color-verde);
+}
+
+/* Clase para texto con subrayado decorativo */
+.texto-subrayado {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+/* Estilo compartido para todos los encabezados de sección */
+.seccion-encabezado {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.seccion-encabezado h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.seccion-encabezado p {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+}
+
+
+/* ================================================
+   BOTONES — Estilos reutilizables
+   Aplicamos la clase .boton a todos los botones,
+   y luego clases adicionales para variantes.
+   ================================================ */
+
+/* Estilo BASE de todos los botones */
+.boton {
+  display: inline-block;   /* Permite darle padding y width como a un bloque */
+  padding: 13px 28px;      /* Relleno interno: arriba/abajo 13px, lados 28px */
+  border-radius: 50px;     /* Esquinas muy redondeadas (forma de "píldora") */
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;         /* El cursor cambia a manita al pasar encima */
+
+  /* transition hace que los cambios (hover) sean suaves y no bruscos */
+  transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+
+/* Botón principal: fondo verde lima */
+.boton-principal {
+  background-color: var(--color-verde);
+  color: #0d0d0d;          /* Texto oscuro sobre fondo claro */
+}
+.boton-principal:hover {
+  /*
+    :hover es un pseudo-selector: se activa cuando el cursor
+    pasa sobre el elemento.
+  */
+  background-color: var(--color-verde-oscuro);
+  transform: translateY(-3px);   /* Sube 3px al hacer hover */
+  box-shadow: 0 8px 20px rgba(200, 245, 63, 0.3); /* Sombra verde suave */
+}
+
+/* Botón secundario: transparente con borde */
+.boton-secundario {
+  background-color: transparent;
+  color: var(--color-texto);
+  border: 1.5px solid var(--color-borde);
+}
+.boton-secundario:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Botón oscuro: para la sección CTA sobre fondo verde */
+.boton-oscuro {
+  background-color: #0d0d0d;
+  color: var(--color-verde);
+}
+.boton-oscuro:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-3px);
+}
+
+/* Modificador de tamaño: botón grande */
+.boton-grande {
+  padding: 16px 36px;
+  font-size: 17px;
+}
+
+
+/* ================================================
+   3. NAVBAR
+   La barra de navegación fija en la parte superior.
+   ================================================ */
+.navbar {
+  /*
+    position: fixed mantiene la navbar siempre visible
+    aunque el usuario haga scroll hacia abajo.
+  */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Se muestra encima de todo el contenido */
+
+  height: 64px;
+
+  /*
+    FLEXBOX: activamos el modelo flexible en este contenedor.
+    Sus hijos directos (.logo y .menu) se convierten en "flex items".
+  */
+  display: flex;
+  align-items: center;          /* Centra los hijos verticalmente */
+  justify-content: space-between; /* Logo a la izquierda, menú a la derecha */
+
+  padding: 0 40px; /* Espacio interno izquierda y derecha */
+
+  /* Fondo semitransparente con efecto de desenfoque */
+  background-color: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-borde);
+}
+
+/* Logo */
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.logo-acento {
+  color: var(--color-verde);
+}
+
+/* Menú de navegación */
+.menu {
+  /*
+    FLEXBOX en la lista del menú:
+    convierte los <li> en elementos en fila.
+  */
+  display: flex;
+  gap: 36px; /* Espacio entre cada elemento del menú */
+}
+.menu a {
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  transition: color 0.2s;
+}
+.menu a:hover {
+  color: var(--color-texto);
+}
+
+
+/* ================================================
+   4. HERO
+   La sección principal con texto e imagen.
+   ================================================ */
+.hero {
+  /*
+    Añadimos padding-top igual a la altura de la navbar (64px)
+    más espacio extra, para que el contenido no quede tapado.
+  */
+  padding: 130px 60px 80px;
+
+  /*
+    FLEXBOX: ponemos el texto y la imagen uno al lado del otro.
+  */
+  display: flex;
+  align-items: center;     /* Centra verticalmente texto e imagen */
+  gap: 60px;               /* Espacio entre las dos columnas */
+
+  max-width: 1100px;       /* Ancho máximo del contenido */
+  margin: 0 auto;          /* Centra el contenedor en la página */
+}
+
+/* Columna de texto (lado izquierdo) */
+.hero-texto {
+  flex: 1;
+  /*
+    flex: 1 hace que este div ocupe el espacio disponible.
+    Como ambas columnas tienen flex: 1, se reparten el espacio mitad y mitad.
+  */
+}
+
+/* Pequeña etiqueta sobre el título */
+.etiqueta {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+/* Título principal */
+.hero-titulo {
+  font-size: 3.2rem;       /* rem = relativo al tamaño base del navegador */
+  font-weight: 700;
+  line-height: 1.1;        /* Interlineado más compacto para títulos */
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+/* Párrafo de descripción */
+.hero-descripcion {
+  font-size: 1.05rem;
+  color: var(--color-texto-suave);
+  margin-bottom: 32px;
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+/* Contenedor de los dos botones */
+.hero-botones {
+  display: flex;   /* Botones en fila */
+  gap: 14px;       /* Espacio entre botones */
+  flex-wrap: wrap; /* Si no caben, el segundo pasa a la siguiente línea */
+}
+
+/* Columna de imagen (lado derecho) */
+.hero-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Centra la imagen horizontalmente */
+}
+
+/* La imagen del producto */
+.imagen-producto {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;   /* Esquinas redondeadas */
+  object-fit: cover;     /* La imagen llena el espacio sin deformarse */
+}
+
+
+/* ================================================
+   5. CARACTERÍSTICAS
+   Tres tarjetas con íconos y texto.
+   ================================================ */
+.caracteristicas {
+  padding: 100px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Contenedor de las 3 tarjetas */
+.tarjetas-grid {
+  display: flex;         /* Las tarjetas quedan en fila */
+  gap: 20px;             /* Espacio entre tarjetas */
+}
+
+/* Cada tarjeta individual */
+.tarjeta {
+  flex: 1;               /* Todas las tarjetas tienen el mismo ancho */
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 16px;
+  padding: 32px;
+
+  /* transition para que el efecto hover sea suave */
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+/* Efecto al pasar el cursor sobre una tarjeta */
+.tarjeta:hover {
+  transform: translateY(-6px);      /* Sube 6px */
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Ícono grande en la tarjeta */
+.tarjeta-icono {
+  font-size: 36px;
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+/* Título de la tarjeta */
+.tarjeta h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Texto de la tarjeta */
+.tarjeta p {
+  font-size: 0.95rem;
+  color: var(--color-texto-suave);
+  line-height: 1.65;
+}
+
+
+/* ================================================
+   6. TESTIMONIOS
+   Fondo diferente para distinguir la sección.
+   ================================================ */
+.testimonios {
+  background-color: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  padding: 100px 60px;
+}
+
+/* Contenedor de las 3 tarjetas de testimonio */
+.testimonios-grid {
+  display: flex;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Cada tarjeta de testimonio */
+.testimonio-tarjeta {
+  flex: 1;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.25s, border-color 0.25s;
+}
+.testimonio-tarjeta:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* La cita del testimonio */
+.testimonio-tarjeta blockquote {
+  font-size: 0.98rem;
+  color: var(--color-texto);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 22px;
+}
+
+/* Sección con foto y nombre del autor */
+.testimonio-autor {
+  display: flex;     /* Foto y texto en fila */
+  align-items: center;
+  gap: 12px;
+}
+
+/* Foto redonda del autor */
+.foto-autor {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;   /* 50% = círculo perfecto */
+  object-fit: cover;
+  border: 2px solid var(--color-borde);
+
+  /* flex-shrink: 0 evita que la foto se encoja si el texto es largo */
+  flex-shrink: 0;
+}
+
+/* Nombre del autor */
+.testimonio-autor strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Cargo/ciudad del autor */
+.testimonio-autor span {
+  display: block;
+  font-size: 12px;
+  color: var(--color-texto-suave);
+}
+
+
+/* ================================================
+   7. CTA FINAL
+   Sección de fondo verde que invita a comprar.
+   ================================================ */
+.cta {
+  background-color: var(--color-verde);
+  padding: 100px 60px;
+  text-align: center;
+
+  /* Flexbox para centrar todo el contenido verticalmente */
+  display: flex;
+  flex-direction: column;  /* Los hijos se apilan en columna (uno debajo del otro) */
+  align-items: center;     /* Centra horizontalmente */
+  gap: 16px;
+}
+
+/* Título de la sección CTA */
+.cta h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0d0d0d;          /* Texto oscuro sobre fondo verde */
+  max-width: 600px;
+  line-height: 1.15;
+}
+
+/* Párrafo de la sección CTA */
+.cta p {
+  font-size: 1rem;
+  color: rgba(13, 13, 13, 0.65);
+}
+
+/* Texto de garantías */
+.garantias {
+  font-size: 13px;
+  color: rgba(13, 13, 13, 0.5);
+  margin-top: 4px;
+}
+
+
+/* ================================================
+   8. FOOTER
+   Pie de página con 4 columnas.
+   ================================================ */
+.footer {
+  background-color: var(--color-fondo);
+  border-top: 1px solid var(--color-borde);
+  padding: 60px 60px 30px;
+}
+
+/* Contenedor de las 4 columnas del footer */
+.footer-contenido {
+  display: flex;       /* Las 4 columnas en fila */
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* Cada columna del footer */
+.footer-columna {
+  flex: 1;             /* Todas las columnas con el mismo ancho */
+}
+
+/* Texto descriptivo en la columna del logo */
+.footer-columna p {
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* Títulos de las columnas del footer */
+.footer-columna h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-texto);
+  margin-bottom: 14px;
+}
+
+/* Lista de links en el footer */
+.footer-lista {
+  display: flex;
+  flex-direction: column;  /* Links apilados verticalmente */
+  gap: 10px;
+}
+.footer-lista a {
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  transition: color 0.2s;
+}
+.footer-lista a:hover {
+  color: var(--color-texto);
+}
+
+/* Links de redes sociales */
+.redes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.red-social {
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  transition: color 0.2s;
+}
+.red-social:hover {
+  color: var(--color-verde);
+}
+
+/* Línea divisora horizontal */
+.footer-divisor {
+  border: none;
+  border-top: 1px solid var(--color-borde);
+  max-width: 1100px;
+  margin: 0 auto 20px;
+}
+
+/* Texto de derechos */
+.footer-derechos {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(240, 237, 232, 0.3);
+}
+
+
+/* ================================================
+   9. RESPONSIVE — CELULARES
+   Con @media podemos aplicar estilos SOLO cuando
+   la pantalla sea más pequeña que cierto ancho.
+   ================================================ */
+@media (max-width: 768px) {
+  /*
+    Todo lo que esté dentro de este bloque SOLO se aplica
+    cuando el ancho de pantalla sea 768px o menos.
+    768px es el ancho típico de una tablet.
+  */
+
+  /* Ocultamos el menú en celulares (simplificación para principiantes) */
+  .menu {
+    display: none;
+  }
+
+  /* El hero pasa de 2 columnas a 1 (se apilan) */
+  .hero {
+    flex-direction: column;  /* De fila a columna */
+    text-align: center;
+    padding: 100px 24px 60px;
+  }
+
+  .hero-descripcion {
+    margin: 0 auto 32px; /* Centrar el párrafo */
+  }
+
+  .hero-botones {
+    justify-content: center;  /* Centra los botones */
+    flex-direction: column;   /* Botones apilados en celular */
+    align-items: center;
+  }
+
+  /* Hacemos los botones más anchos en celular */
+  .boton {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Las tarjetas de características se apilan */
+  .tarjetas-grid {
+    flex-direction: column;
+  }
+
+  /* Los testimonios también se apilan */
+  .testimonios-grid {
+    flex-direction: column;
+  }
+
+  /* El footer se apila en 1 columna */
+  .footer-contenido {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Reducimos el padding en secciones para celular */
+  .caracteristicas,
+  .testimonios,
+  .cta,
+  .footer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Título más pequeño en celular */
+  .hero-titulo {
+    font-size: 2.2rem;
+  }
+
+  .cta h2 {
+    font-size: 1.8rem;
+  }
+}

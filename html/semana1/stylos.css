@@ -1,0 +1,56 @@
+/*Selectores*/
+/*selector {
+    propiedad: valor;
+}*/
+
+/*selector universal*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/*selector de tipo*/
+
+h1 {
+    color: purple;
+    font-size: 23px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/*selector de clase*/
+.mi-clase {
+    font-weight: bold;
+    color: purple;
+    font-size: 20px;
+}
+
+.clase2 {
+    color: blue;
+    font-size: 18px;
+    opacity: 0.35   ;
+    position: relative;
+    background-color: orange;
+}
+
+.clase3 {
+    color: green;
+    font-size: 18px;
+    opacity: 0.85   ;
+    position: relative;
+}
+ul {
+  border: 1px dashed blue;
+}
+li {
+  border: 1px dashed red;
+  list-style-type: none;
+}
+/*selector de id*/
+#parrafo {
+    font-style: italic;
+}
+ 
+img {
+    
+    border: 20px solid black;
+}

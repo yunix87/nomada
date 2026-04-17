@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Video con Subtítulos</title>
+</head>
+<body>
+
+<h2>Ejemplo de Video con Subtítulos (HTML5)</h2>
+
+<video controls width="600">
+    <source src="video.mp4" type="video/mp4">
+
+    <!-- Subtítulos en español -->
+    <track src="subtitulo.vtt" kind="subtitles" srclang="es" label="Español" default>
+
+       Tu navegador no soporta video HTML5.
+</video>
+<!--relación 16:9-->
+<iframe 
+src="https://www.youtube.com/embed/eo1gKGt6h9M"
+width="560"
+height="315"
+loading="lazy"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+/*Selectores*/
+/*selector {
+    propiedad: valor;
+}*/
+
+/*selector universal*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/*selector de tipo*/
+
+h1 {
+    color: purple;
+    font-size: 23px;
+    font-family: 'jetbrains mono';
+}
+
+/*selector de clase*/
+.mi-clase {
+    font-weight: bold;
+    color: orange;
+    font-size: 20px;
+}
+/*selector de id*/
+#parrafo {
+    font-style: italic;
+}

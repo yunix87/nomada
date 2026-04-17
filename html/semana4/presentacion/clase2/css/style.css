@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: #f4f6f9;
+}
+
+/* Layout principal */
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 60px 1fr;
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  grid-column: 1 / 3;
+  background: #1e293b;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #334155;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+/* Contenido */
+.main {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Tarjetas */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: bold;
+}

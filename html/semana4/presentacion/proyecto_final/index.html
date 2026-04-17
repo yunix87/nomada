@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!-- 
+  DOCTYPE le dice al navegador que este archivo usa HTML5 (la versión moderna).
+  Siempre debe ser la primera línea de tu archivo HTML.
+-->
+
+<html lang="es">
+<!--
+  La etiqueta <html> envuelve TODO el contenido de la página.
+  El atributo lang="es" le dice al navegador que el idioma es español.
+-->
+
+<head>
+  <!--
+    El <head> contiene información SOBRE la página, pero no se muestra
+    directamente en pantalla. Aquí ponemos el título, los estilos, etc.
+  -->
+
+  <!-- Esto le dice al navegador qué tipo de caracteres usar (tildes, ñ, etc.) -->
+  <meta charset="UTF-8" />
+
+  <!-- Esto hace que la página se vea bien en celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- El título que aparece en la pestaña del navegador -->
+  <title>SoundAura — Audífonos Inalámbricos</title>
+
+  <!-- Aquí conectamos nuestra fuente de Google Fonts (tipografía personalizada) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Aquí conectamos nuestro archivo de estilos CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body>
+  <!--
+    El <body> contiene TODO lo que el usuario ve en pantalla.
+    Dentro de body ponemos todas las secciones de nuestra página.
+  -->
+
+
+  <!-- ============================================
+       BARRA DE NAVEGACIÓN
+       Aparece en la parte superior de la página.
+       Contiene el logo y los enlaces del menú.
+  ============================================= -->
+  <nav class="navbar">
+    <!--
+      <nav> es una etiqueta semántica: le dice al navegador
+      que este bloque es un menú de navegación.
+    -->
+
+    <!-- Logo del sitio -->
+    <div class="logo">
+      Sound<span class="logo-acento">Aura</span>
+    </div>
+    <!--
+      Usamos un <span> dentro del logo para colorear solo
+      una parte del texto con CSS.
+    -->
+
+    <!-- Lista de enlaces del menú -->
+    <ul class="menu">
+      <!--
+        <ul> = lista sin orden (unordered list)
+        Cada <li> = un elemento de la lista (list item)
+        El href="#id" hace que al hacer clic baje a esa sección
+      -->
+      <li><a href="#caracteristicas">Características</a></li>
+      <li><a href="#testimonios">Reseñas</a></li>
+      <li><a href="#comprar">Comprar</a></li>
+    </ul>
+
+  </nav>
+
+
+  <!-- ============================================
+       SECCIÓN HERO
+       Es la primera sección grande que ve el usuario.
+       Contiene: imagen del producto, título y botón.
+  ============================================= -->
+  <section class="hero" id="inicio">
+    <!--
+      <section> agrupa contenido relacionado.
+      id="inicio" nos permite crear un enlace que lleve aquí.
+    -->
+
+    <!-- Columna izquierda: texto del hero -->
+    <div class="hero-texto">
+
+      <!-- Pequeña etiqueta encima del título -->
+      <span class="etiqueta">Nuevo · Edición 2025</span>
+
+      <!--
+        <h1> es el título más importante de la página.
+        Solo debe haber UN <h1> por página.
+      -->
+      <h1 class="hero-titulo">
+        El sonido que <span class="texto-verde">mereces</span>,<br />
+        sin cables.
+      </h1>
+      <!--
+        <br /> inserta un salto de línea dentro del texto.
+      -->
+
+      <!-- Párrafo de descripción -->
+      <p class="hero-descripcion">
+        SoundAura Pro redefine el audio inalámbrico con cancelación de ruido,
+        40 horas de batería y una calidad de sonido que te hará olvidar el mundo.
+      </p>
+
+      <!-- Botones de acción (CTA = Call To Action) -->
+      <div class="hero-botones">
+        <a href="#comprar" class="boton boton-principal">Comprar ahora — $199</a>
+        <a href="#caracteristicas" class="boton boton-secundario">Ver características</a>
+      </div>
+      <!--
+        Usamos etiquetas <a> (enlaces) como botones.
+        Les damos clases CSS para darles apariencia de botón.
+      -->
+
+    </div>
+
+    <!-- Columna derecha: imagen del producto -->
+    <div class="hero-imagen">
+      <img
+        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80&auto=format&fit=crop"
+        alt="Audífonos SoundAura Pro inalámbricos"
+        class="imagen-producto"
+      />
+      <!--
+        El atributo alt describe la imagen para personas con
+        discapacidad visual y para los motores de búsqueda.
+        ¡Siempre ponlo!
+      -->
+    </div>
+
+  </section>
+
+
+  <!-- ============================================
+       SECCIÓN CARACTERÍSTICAS
+       Muestra las 3 principales ventajas del producto
+       en tarjetas individuales.
+  ============================================= -->
+  <section class="caracteristicas" id="caracteristicas">
+
+    <!-- Encabezado de la sección -->
+    <div class="seccion-encabezado">
+      <h2>¿Por qué elegir SoundAura?</h2>
+      <p>Tecnología de punta en un diseño elegante y cómodo.</p>
+    </div>
+
+    <!-- Contenedor de las 3 tarjetas -->
+    <div class="tarjetas-grid">
+      <!--
+        Este div va a usar Flexbox en CSS para que las 3
+        tarjetas queden lado a lado en pantallas grandes.
+      -->
+
+      <!-- Tarjeta 1 -->
+      <div class="tarjeta">
+        <!-- Ícono grande decorativo -->
+        <div class="tarjeta-icono">🔇</div>
+        <h3>Cancelación de ruido</h3>
+        <p>
+          Tecnología ANC de tercera generación bloquea hasta el 98% del
+          ruido exterior. Concentración total, siempre.
+        </p>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="tarjeta">
+        <div class="tarjeta-icono">🔋</div>
+        <h3>40 horas de batería</h3>
+        <p>
+          La batería más duradera de su categoría. Escucha música durante
+          toda una semana de trabajo sin recargar.
+        </p>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="tarjeta">
+        <div class="tarjeta-icono">🌊</div>
+        <h3>Audio espacial</h3>
+        <p>
+          Drivers de 40 mm con imagen sonora envolvente. Como estar
+          en el concierto, desde cualquier lugar.
+        </p>
+      </div>
+
+    </div><!-- fin .tarjetas-grid -->
+
+  </section>
+
+
+  <!-- ============================================
+       SECCIÓN TESTIMONIOS
+       Muestra opiniones reales de usuarios del producto.
+  ============================================= -->
+  <section class="testimonios" id="testimonios">
+
+    <div class="seccion-encabezado">
+      <h2>Lo que dicen nuestros usuarios</h2>
+      <!-- Las estrellas son caracteres de texto normales ★ -->
+      <p>★★★★★ &nbsp; 4.9 / 5 basado en más de 2,400 reseñas</p>
+    </div>
+
+    <!-- Contenedor de las tarjetas de testimonio -->
+    <div class="testimonios-grid">
+
+      <!-- Testimonio 1 -->
+      <div class="testimonio-tarjeta">
+        <!--
+          <blockquote> es la etiqueta correcta para citas
+          o comentarios de otras personas.
+        -->
+        <blockquote>
+          "El ANC es tan efectivo que puedo concentrarme en una cafetería
+          llena. Y la batería nunca los he visto llegar a cero."
+        </blockquote>
+
+        <!-- Información del autor -->
+        <div class="testimonio-autor">
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&q=80&fit=crop&crop=face"
+            alt="Foto de Andrea Morales"
+            class="foto-autor"
+          />
+          <div>
+            <strong>Andrea Morales</strong>
+            <span>Diseñadora · Ciudad de México</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonio 2 -->
+      <div class="testimonio-tarjeta">
+        <blockquote>
+          "Probé todos los de la categoría. SoundAura gana en confort.
+          Puedo usarlos 8 horas seguidas sin molestias."
+        </blockquote>
+        <div class="testimonio-autor">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&q=80&fit=crop&crop=face"
+            alt="Foto de Carlos Vega"
+            class="foto-autor"
+          />
+          <div>
+            <strong>Carlos Vega</strong>
+            <span>Desarrollador · Bogotá</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonio 3 -->
+      <div class="testimonio-tarjeta">
+        <blockquote>
+          "El audio espacial es la razón por la que no puedo volver
+          a otros audífonos. Es como estar en el concierto."
+        </blockquote>
+        <div class="testimonio-autor">
+          <img
+            src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=60&h=60&q=80&fit=crop&crop=face"
+            alt="Foto de Sebastián Ruiz"
+            class="foto-autor"
+          />
+          <div>
+            <strong>Sebastián Ruiz</strong>
+            <span>Músico · Buenos Aires</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- fin .testimonios-grid -->
+
+  </section>
+
+
+  <!-- ============================================
+       SECCIÓN CTA FINAL (Llamado a la acción)
+       Invita al usuario a comprar el producto.
+  ============================================= -->
+  <section class="cta" id="comprar">
+
+    <h2>Llévatelos hoy con <span class="texto-subrayado">$50 de descuento</span></h2>
+    <p>Precio regular $249. Solo por tiempo limitado: <strong>$199</strong>.</p>
+
+    <a href="#" class="boton boton-oscuro boton-grande">
+      Comprar SoundAura Pro — $199
+    </a>
+
+    <!-- Pequeño texto de garantías -->
+    <p class="garantias">
+      ✓ Envío gratis &nbsp;·&nbsp; ✓ 30 días de devolución &nbsp;·&nbsp; ✓ Garantía 2 años
+    </p>
+
+  </section>
+
+
+  <!-- ============================================
+       FOOTER (Pie de página)
+       Información de contacto y redes sociales.
+  ============================================= -->
+  <footer class="footer">
+
+    <!-- Contenido principal del footer -->
+    <div class="footer-contenido">
+
+      <!-- Columna 1: Logo y descripción -->
+      <div class="footer-columna">
+        <div class="logo">Sound<span class="logo-acento">Aura</span></div>
+        <p>Audio sin compromisos.<br />Tecnología que se siente.</p>
+      </div>
+
+      <!-- Columna 2: Links del producto -->
+      <div class="footer-columna">
+        <h4>Producto</h4>
+        <ul class="footer-lista">
+          <li><a href="#">Características</a></li>
+          <li><a href="#">Especificaciones</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Links de soporte -->
+      <div class="footer-columna">
+        <h4>Soporte</h4>
+        <ul class="footer-lista">
+          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Redes sociales -->
+      <div class="footer-columna">
+        <h4>Redes sociales</h4>
+        <!-- Lista de íconos de redes (usando texto/emojis simples) -->
+        <div class="redes">
+          <a href="#" class="red-social">Instagram</a>
+          <a href="#" class="red-social">Twitter</a>
+          <a href="#" class="red-social">YouTube</a>
+        </div>
+      </div>
+
+    </div><!-- fin .footer-contenido -->
+
+    <!-- Línea divisora -->
+    <hr class="footer-divisor" />
+
+    <!-- Texto de derechos al fondo -->
+    <p class="footer-derechos">
+      © 2025 SoundAura Inc. Todos los derechos reservados.
+    </p>
+
+  </footer>
+
+
+</body>
+<!--
+  Siempre cierra las etiquetas que abres.
+  <html> se abre arriba y se cierra aquí abajo.
+-->
+</html>
