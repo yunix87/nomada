@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="contenedor contenido-header">
+        <div class="imagen-header">
+          <picture>
+            <source
+              sizes="1920w"
+              srcset="img/header.avif 1920w"
+              type="image/avif"
+            />
+            <source
+              sizes="1920w"
+              srcset="img/header.webp 1920w"
+              type="image/webp"
+            />
+            <source
+              sizes="1920w"
+              srcset="img/header.png 1920w"
+              type="image/jpeg"
+            />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="img/header.png"
+              lazyalt="imagen"
+              width="1000"
+              height="600"
+            />
+          </picture>
+        </div>
+
+        <div class="texto-header">
+          <p class="frase-producto">Calidad que se escucha</p>
+          <h1 class="nombre-producto degradado-verde">AuroraSound</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+            architecto vitae cumque accusamus at dolorum explicabo. Iure ad
+            optio, aspernatur esse facere maxime quia quasi adipisci dolorum
+            voluptatem eum dolores.
+          </p>
+          <p class="precio-producto">Desde <span>$399</span></p>
+
+          <a href="#" class="boton-cta">Comprar Ahora</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="contenedor">
+      <div class="iconos">
+        <div class="icono">
+          <img src="img/icono-sonido.svg" alt="imagen icono" />
+          <h3>Gran Sonido</h3>
+          <p>
+            Rerum quas iusto temporibus soluta, at cum vero sunt fugit, nobis
+            totam aliquid nesciunt quos autem qui, vitae nam facilis amet
+            laboriosam!
+          </p>
+        </div>
+
+        <div class="icono">
+          <img src="img/icono-garantia.svg" alt="imagen icono" />
+          <h3>Garantía de por vida</h3>
+          <p>
+            Rerum quas iusto temporibus soluta, at cum vero sunt fugit, nobis
+            totam aliquid nesciunt quos autem qui, vitae nam facilis amet
+            laboriosam!
+          </p>
+        </div>
+
+        <div class="icono">
+          <img src="img/icono-bateria.svg" alt="imagen icono" />
+          <h3>+20 Horas de Bateria</h3>
+          <p>
+            Rerum quas iusto temporibus soluta, at cum vero sunt fugit, nobis
+            totam aliquid nesciunt quos autem qui, vitae nam facilis amet
+            laboriosam!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonios">
+      <div class="contenedor">
+        <h2 class="text-center">Lo que dicen nuestros clientes</h2>
+
+        <div class="contenedor-testimonios">
+          <div class="testimonio">
+            <p>
+              “El sonido es increíble, superó mis expectativas completamente.”
+            </p>
+            <h3>- María López</h3>
+          </div>
+
+          <div class="testimonio">
+            <p>“La batería dura muchísimo, ideal para viajes largos.”</p>
+            <h3>- Carlos Pérez</h3>
+          </div>
+
+          <div class="testimonio">
+            <p>“Diseño elegante y calidad premium. Totalmente recomendado.”</p>
+            <h3>- Ana Torres</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+
+  <div class="footer-contenido">        <!-- flex container -->
+
+    <div class="footer-columna">        <!-- columna 1 -->
+      Logo + párrafo descriptivo
+    </div>
+
+    <div class="footer-columna">        <!-- columna 2 -->
+      <h4>Producto</h4>
+      <ul class="footer-lista"> ... </ul>
+    </div>
+
+    <div class="footer-columna">        <!-- columna 3 -->
+      <h4>Soporte</h4>
+      <ul class="footer-lista"> ... </ul>
+    </div>
+
+    <div class="footer-columna">        <!-- columna 4 -->
+      <h4>Redes sociales</h4>
+      <div class="redes"> ... </div>
+    </div>
+
+  </div>
+
+  <hr class="footer-divisor" />
+  <p class="footer-derechos">© 2025 ...</p>
+
+</footer>
+  </body>
+</html>
